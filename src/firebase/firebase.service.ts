@@ -15,13 +15,13 @@ export class FirebaseService {
         private configService: ConfigService
     ) {
         this.app = initializeApp({
-            apiKey: "AIzaSyC9hv2TByyoYWGDhEP-f-I5MtHLAse9lTQ",
-            authDomain: "computation-60a26.firebaseapp.com",
-            projectId: "computation-60a26",
-            storageBucket: "computation-60a26.appspot.com",
-            messagingSenderId: "1013642692413",
-            appId: "1:1013642692413:web:5ad510db04701833b8e754",
-            measurementId: "G-WW868MBGEW"
+            apiKey: process.env.API_KEY,
+            authDomain: process.env.AUTH_DOMAIN,
+            projectId: process.env.PROJECT_ID,
+            storageBucket: process.env.STORAGE_BUCKET,
+            messagingSenderId: process.env.MESSAGING_SENDER_ID,
+            appId: process.env.APP_ID,
+            measurementId: process.env.MEASUREMENT_ID
         });
 
         this.auth = getAuth(this.app);

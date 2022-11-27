@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { FirebaseService } from './firebase/firebase.service';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, ConfigModule.forRoot()],
+  imports: [AuthModule, ConfigModule.forRoot({
+    isGlobal: true,
+    envFilePath: '.env'
+  })],
   providers: [FirebaseService],
 })
 export class AppModule { }
