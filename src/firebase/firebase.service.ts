@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { Auth, getAuth } from "firebase/auth";
-import { CollectionReference, Firestore } from "firebase/firestore"
+import { CollectionReference, Firestore, getFirestore, collection } from "firebase/firestore"
 
 @Injectable()
 export class FirebaseService {
@@ -25,5 +25,10 @@ export class FirebaseService {
         });
 
         this.auth = getAuth(this.app);
+        this.firestore = getFirestore(this.app);
+        this.createCollections();
     }
+    private createCollections() {
+        this.userCollection = collection(this.firestore, "users");
+    };
 }
