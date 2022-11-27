@@ -3,10 +3,21 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { ConfigModule } from '@nestjs/config';
 import { FirebaseService } from 'src/firebase/firebase.service';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { jwtConstants } from './constants';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
-  imports: [ConfigModule],
+  imports: [
+    ConfigModule,
+    PassportModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60s' },
+    }),
+  ],
   controllers: [AuthController],
-  providers: [AuthService, FirebaseService]
+  providers: [AuthService, FirebaseService, JwtStrategy]
 })
 export class AuthModule { }

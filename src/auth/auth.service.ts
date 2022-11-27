@@ -5,14 +5,16 @@ import { RegisterDto } from './models/register.dto';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
 import { setDoc, DocumentReference, doc, DocumentSnapshot, DocumentData, getDoc } from "firebase/firestore";
 import { User } from './user.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
     constructor(
-        private firebaseService: FirebaseService
+        private firebaseService: FirebaseService,
+        private jwtService: JwtService
     ) { }
 
-    async login(data: LoginDTO): Promise<Omit<User, "password">> {
+    async login(data: LoginDTO): Promise<Omit<any, "password">> {
         try {
             const user: UserCredential = await signInWithEmailAndPassword(this.firebaseService.auth, data.email, data.password);
             if (user) {
@@ -24,7 +26,13 @@ export class AuthService {
                     id: snapshot?.id,
                 } as User;
                 delete loggedUser?.password;
-                return loggedUser;
+                const payload = { username: loggedUser.email, sub: loggedUser.id };
+                const jwtToken = await this.jwtService.signAsync(payload);
+                // return loggedUser;
+                return {
+                    loggedUser,
+                    access_token: jwtToken,
+                };
             }
         } catch (error) {
             return error?.message
