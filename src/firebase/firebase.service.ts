@@ -8,9 +8,11 @@ import { CollectionReference, Firestore, getFirestore, collection } from "fireba
 export class FirebaseService {
     public app: FirebaseApp;
     public auth: Auth;
-    public userCollection: CollectionReference;
     public firestore: Firestore;
 
+    //collections
+    public userCollection: CollectionReference;
+    public computationCollection: CollectionReference;
     constructor(
         private configService: ConfigService
     ) {
@@ -30,5 +32,6 @@ export class FirebaseService {
     }
     private createCollections() {
         this.userCollection = collection(this.firestore, "users");
+        this.computationCollection = collection(this.firestore, "computation");
     };
 }
