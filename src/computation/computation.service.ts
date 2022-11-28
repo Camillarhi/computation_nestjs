@@ -25,7 +25,6 @@ export class ComputationService {
             const result = Number(data?.firstInput) + Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
-            // data.operation = "+";
             data.userId = user;
             const docRef: DocumentReference = doc(this.firebaseService.computationCollection, data.id);
             await setDoc(docRef, data);
@@ -41,7 +40,6 @@ export class ComputationService {
             const result = Number(data?.firstInput) - Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
-            // data.operation = "-";
             data.userId = user;
             const docRef: DocumentReference = doc(this.firebaseService.computationCollection, data.id);
             await setDoc(docRef, data);
@@ -57,7 +55,6 @@ export class ComputationService {
             const result = Number(data?.firstInput) / Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
-            // data.operation = "/";
             data.userId = user;
             const docRef: DocumentReference = doc(this.firebaseService.computationCollection, data.id);
             await setDoc(docRef, data);
@@ -73,7 +70,6 @@ export class ComputationService {
             const result = Number(data?.firstInput) * Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
-            // data.operation = "*";
             data.userId = user;
             const docRef: DocumentReference = doc(this.firebaseService.computationCollection, data.id);
             await setDoc(docRef, data);
@@ -89,7 +85,6 @@ export class ComputationService {
             const result = Math.sqrt(Number(data?.firstInput));
             data.id = uniqueId();
             data.result = result;
-            // data.operation = "√";
             data.userId = user;
             const docRef: DocumentReference = doc(this.firebaseService.computationCollection, data.id);
             await setDoc(docRef, data);
@@ -105,7 +100,6 @@ export class ComputationService {
             const result = Number(data?.firstInput) % Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
-            // data.operation = "%";
             data.userId = user;
             const docRef: DocumentReference = doc(this.firebaseService.computationCollection, data.id);
             await setDoc(docRef, data);
