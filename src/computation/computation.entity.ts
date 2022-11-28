@@ -11,4 +11,7 @@ export class Computation {
 
     @IsNotEmpty()
     result: number;
+
+    @IsNotEmpty()
+    operation: string;
 }

@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsEmpty, IsNotEmpty } from "class-validator";
 
 export class ComputationDTO {
     @ApiProperty({
@@ -9,10 +9,10 @@ export class ComputationDTO {
     @IsNotEmpty()
     firstInput: number;
 
-    @ApiProperty({
+    @ApiPropertyOptional({
         type: Number,
-        description: 'This is a required property',
+        description: 'This is an optional property',
     })
-    @IsNotEmpty()
+    @IsEmpty()
     secondInput: number;
 }

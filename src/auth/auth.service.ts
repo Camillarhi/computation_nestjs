@@ -3,7 +3,7 @@ import { FirebaseService } from 'src/firebase/firebase.service';
 import { LoginDTO } from './models/login.dto';
 import { RegisterDto } from './models/register.dto';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
-import { setDoc, DocumentReference, doc, DocumentSnapshot, DocumentData, getDoc } from "firebase/firestore";
+import { setDoc, DocumentReference, doc, DocumentSnapshot, DocumentData, getDoc, query, where } from "firebase/firestore";
 import { User } from './user.entity';
 import { JwtService } from '@nestjs/jwt';
 
@@ -13,6 +13,12 @@ export class AuthService {
         private firebaseService: FirebaseService,
         private jwtService: JwtService
     ) { }
+
+    async getUser(id: string) {
+        console.log({id})
+        const result = query(this.firebaseService.userCollection, where("id", "==", id));
+        return result;
+    }
 
     async login(data: LoginDTO): Promise<Omit<any, "password">> {
         try {
