@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Req, Delete, Param } from '@nestjs/common';
 import { Request } from 'express';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -46,5 +46,10 @@ export class ComputationController {
   @Post("modulus")
   async modulus(@Body() body: ComputationDTO, @Req() request: Request) {
     return this.computationService.modulus(body, request.user["userId"]);
+  };
+
+  @Delete(":id")
+  async del(@Param("id") id: string) {
+    return this.computationService.deleteResult(id);
   };
 }

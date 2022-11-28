@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { doc, DocumentReference, getDocs, setDoc, query, where } from "firebase/firestore";
+import { doc, DocumentReference, getDocs, setDoc, query, where, deleteDoc } from "firebase/firestore";
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { uniqueId } from 'src/utils/uniqueId';
 
@@ -113,5 +113,9 @@ export class ComputationService {
         } catch (error) {
             return error?.message
         };
+    };
+
+    async deleteResult(id: string) {
+        await deleteDoc(doc(this.firebaseService.computationCollection, id));
     };
 }
