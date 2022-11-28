@@ -38,7 +38,7 @@ export class ComputationService {
     async substraction(data: any, user: any) {
         try {
             if (!data?.secondInput) data.secondInput = 0;
-            const result = data?.firstInput - data?.secondInput;
+            const result = Number(data?.firstInput) - Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
             // data.operation = "-";
@@ -54,7 +54,7 @@ export class ComputationService {
     async divison(data: any, user: any) {
         try {
             if (!data?.secondInput) data.secondInput = 1;
-            const result = data?.firstInput / data?.secondInput;
+            const result = Number(data?.firstInput) / Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
             // data.operation = "/";
@@ -70,7 +70,7 @@ export class ComputationService {
     async multiplication(data: any, user: any) {
         try {
             if (!data?.secondInput) data.secondInput = 1;
-            const result = data?.firstInput * data?.secondInput;
+            const result = Number(data?.firstInput) * Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
             // data.operation = "*";
@@ -86,7 +86,7 @@ export class ComputationService {
     async root(data: any, user: any) {
         try {
             data.secondInput = 0;
-            const result = Math.sqrt(data?.firstInput);
+            const result = Math.sqrt(Number(data?.firstInput));
             data.id = uniqueId();
             data.result = result;
             // data.operation = "√";
@@ -102,7 +102,7 @@ export class ComputationService {
     async modulus(data: any, user: any) {
         try {
             if (!data?.secondInput) data.secondInput = 1;
-            const result = data?.firstInput % data?.secondInput;
+            const result = Number(data?.firstInput) % Number(data?.secondInput);
             data.id = uniqueId();
             data.result = result;
             // data.operation = "%";

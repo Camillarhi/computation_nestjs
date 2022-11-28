@@ -15,7 +15,7 @@ export class AuthService {
     ) { }
 
     async getUser(id: string) {
-        console.log({id})
+        console.log({ id })
         const result = query(this.firebaseService.userCollection, where("id", "==", id));
         return result;
     }
@@ -57,7 +57,9 @@ export class AuthService {
                 const docRef: DocumentReference = doc(this.firebaseService.userCollection, id);
                 delete data?.confirmPassword;
                 await setDoc(docRef, data);
+                return { message: "Registration successful" };
             }
+
         } catch (error) {
             return error?.message
         };
