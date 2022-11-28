@@ -1,16 +1,17 @@
-import { Controller, Get, Post, Body, UseGuards, Req, Delete, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
-import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ComputationService } from './computation.service';
 import { ComputationDTO } from './models/computation.dto';
 
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
+@ApiTags("computation")
 @Controller('computation')
 export class ComputationController {
   constructor(
     private readonly computationService: ComputationService,
-    private readonly authService: AuthService
   ) { }
 
   @Get()
