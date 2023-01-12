@@ -29,7 +29,7 @@ export class ComputationController {
     return this.computationService.substraction(body, request.user["userId"]);
   };
 
-  @Post("multiplication")
+  @Post("multiplication")  
   async multiplication(@Body() body: ComputationDTO, @Req() request: Request) {
     return this.computationService.multiplication(body, request.user["userId"]);
   };
